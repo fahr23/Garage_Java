@@ -38,11 +38,24 @@ public class CustomerRepositoryTests {
 
     @Test
     public void testFindByLastName() {
-        Customer customer = new Customer("first", "last");
+        Address address= new Address();
+        Customer customer = new Customer("first", "last",address);
         entityManager.persist(customer);
 
         List<Customer> findByLastName = customers.findByLastName(customer.getLastName());
 
         assertThat(findByLastName).extracting(Customer::getLastName).containsOnly(customer.getLastName());
+    }
+
+
+        @Test
+    public void testEmbedededDemo() {
+        Address address= new Address("Turkey", "Elazig");
+        Customer customer = new Customer("first", "last",address);
+        entityManager.persist(customer);
+
+        List<Customer> findByLastName = customers.findByLastName(customer.getLastName());
+
+        assertThat(findByLastName).extracting(Customer::getAddress).containsOnly(address);
     }
 }
