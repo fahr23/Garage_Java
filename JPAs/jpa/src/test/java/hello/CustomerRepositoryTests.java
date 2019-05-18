@@ -18,7 +18,9 @@ package hello;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,8 +40,12 @@ public class CustomerRepositoryTests {
 
     @Test
     public void testFindByLastName() {
-        Address address= new Address();
-        Customer customer = new Customer("first", "last",address);
+        Address address = new Address();
+        Set<String> phoneNumbers = new HashSet<>();
+
+        phoneNumbers.add("3344");
+        phoneNumbers.add("2333");
+        Customer customer = new Customer("first", "last", address, phoneNumbers);
         entityManager.persist(customer);
 
         List<Customer> findByLastName = customers.findByLastName(customer.getLastName());
@@ -48,14 +54,33 @@ public class CustomerRepositoryTests {
     }
 
 
-        @Test
+    @Test
     public void testEmbedededDemo() {
-        Address address= new Address("Turkey", "Elazig");
-        Customer customer = new Customer("first", "last",address);
+        Address address = new Address("Turkey", "Elazig");
+        Set<String> phoneNumbers = new HashSet<>();
+
+        phoneNumbers.add("3344");
+        phoneNumbers.add("2333");
+        Customer customer = new Customer("first", "last", address, phoneNumbers);
         entityManager.persist(customer);
 
         List<Customer> findByLastName = customers.findByLastName(customer.getLastName());
 
         assertThat(findByLastName).extracting(Customer::getAddress).containsOnly(address);
+    }
+
+    @Test
+    public void testElementCollection() {
+        Address address = new Address("Turkey", "Elazig");
+        Set<String> phoneNumbers = new HashSet<>();
+
+        phoneNumbers.add("3344");
+        phoneNumbers.add("2333");
+        Customer customer = new Customer("first", "last", address, phoneNumbers);
+        entityManager.persist(customer);
+
+        List<Customer> findByLastName = customers.findByLastName(customer.getLastName());
+
+        assertThat(findByLastName).extracting(Customer::getPhoneNumbers).containsOnly(phoneNumbers);
     }
 }
