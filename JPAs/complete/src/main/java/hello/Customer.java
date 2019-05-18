@@ -1,10 +1,7 @@
 // tag::sample[]
 package hello;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Customer {
@@ -15,12 +12,21 @@ public class Customer {
     private String firstName;
     private String lastName;
 
+    @Embedded
+    @AttributeOverrides(value = {
+            @AttributeOverride(name="address1", column = @Column(name = "addressLine1")),
+            @AttributeOverride(name="city", column = @Column(name = "city"))
+    })
+    private Address address;
+
     protected Customer() {}
 
-    public Customer(String firstName, String lastName) {
+    public Customer(String firstName, String lastName, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.address = address;
     }
+
 
     @Override
     public String toString() {
@@ -40,5 +46,9 @@ public class Customer {
 	public String getLastName() {
 		return lastName;
 	}
+
+    public Address getAddress() {
+        return address;
+    }
 }
 

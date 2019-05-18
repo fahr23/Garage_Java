@@ -21,9 +21,10 @@ public class Application {
 	public CommandLineRunner demo(CustomerRepository repository) {
 		return (args) -> {
 			// save a couple of customers
-			repository.save(new Customer("f", "s"));
-			repository.save(new Customer("ff", "ss"));
-			repository.save(new Customer("fff", "sss"));
+			Address address= new Address("Turkey", "Elazig");
+			repository.save(new Customer("f", "s",address));
+			repository.save(new Customer("ff", "ss",address));
+			repository.save(new Customer("fff", "sss",address));
 
 			// fetch all customers
 			log.info("Customers found with findAll():");
