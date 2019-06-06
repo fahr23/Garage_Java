@@ -20,7 +20,6 @@ class MyMath {
     }
 
     public PerformOperation isOdd() {
-        MessageDigest md=new Messag eDigest.getInstance("MD5");
         return (int a) -> a % 2 != 0;
     }
 
