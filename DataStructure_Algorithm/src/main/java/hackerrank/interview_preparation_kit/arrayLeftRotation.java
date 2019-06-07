@@ -7,8 +7,9 @@ import java.text.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
+import java.util.stream.Stream;
 
-public  class arrayLeftRotation {
+public class arrayLeftRotation {
 
 
     public static class Solution {
@@ -16,14 +17,24 @@ public  class arrayLeftRotation {
         // Complete the rotLeft function below.
         static int[] rotLeft(int[] a, int d) {
 
-            return null;
+            int[] result = new int[a.length];
+            int index = 0;
+
+            for (int i = d; i < a.length; i++) {
+                result[index++] = a[i];
+            }
+
+            for (int j = 0; j < d; j++) {
+                result[index++] = a[j];
+            }
+
+            return result;
 
         }
 
         private static final Scanner scanner = new Scanner(System.in);
 
         public static void main(String[] args) throws IOException {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
             String[] nd = scanner.nextLine().split(" ");
 
@@ -42,18 +53,6 @@ public  class arrayLeftRotation {
             }
 
             int[] result = rotLeft(a, d);
-
-            for (int i = 0; i < result.length; i++) {
-                bufferedWriter.write(String.valueOf(result[i]));
-
-                if (i != result.length - 1) {
-                    bufferedWriter.write(" ");
-                }
-            }
-
-            bufferedWriter.newLine();
-
-            bufferedWriter.close();
 
             scanner.close();
         }
