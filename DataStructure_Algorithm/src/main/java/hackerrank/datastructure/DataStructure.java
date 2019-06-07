@@ -17,8 +17,6 @@ class DataStructure {
 
     int java2dArray(int[][] arr) {
 
-        int[][] board = new int[3][3];
-
         int temp, max = Integer.MIN_VALUE;
         for (int i = 0; i < 4; i++) {
             for (int k = 0; k < 4; k++) {
