@@ -8,6 +8,8 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
+import static hackerrank.interview_preparation_kit.hashTablesRansomNote.Solution.checkMagazine;
+
 public class hashTablesRansomNote {
 
 
@@ -15,6 +17,24 @@ public class hashTablesRansomNote {
 
         // Complete the checkMagazine function below.
         static void checkMagazine(String[] magazine, String[] note) {
+            Hashtable<String, Integer> mag = new Hashtable<>();
+
+            for(int i=0; i< magazine.length;i++){
+                mag.merge(magazine[i],1, Integer::sum);
+            }
+
+
+            for (int i = 0; i < note.length; i++) {
+                if (mag.containsKey(note[i]) && mag.get(note[i]) > 0) {
+                    mag.merge(note[i], -1, Integer::sum);
+                } else {
+                    System.out.println("No");
+                    return;
+                }
+            }
+            System.out.println("Yes");
+        }
+
 
 
         }
@@ -54,4 +74,3 @@ public class hashTablesRansomNote {
         }
     }
 
-}
