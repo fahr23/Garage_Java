@@ -16,7 +16,15 @@ public class twoStrings {
         // Complete the twoStrings function below.
         static String twoStrings(String s1, String s2) {
 
-            return "";
+            for(char i='a'; i<'z'; ++i){
+
+                    if(s1.contains(String.valueOf(i))&& s2.contains(String.valueOf(i))){
+                        return "YES";
+                    }
+
+
+            }
+            return "NO";
         }
 
         private static final Scanner scanner = new Scanner(System.in);
